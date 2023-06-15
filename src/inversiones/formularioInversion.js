@@ -7,9 +7,55 @@ const FormularioInversion = () => {
   const [fechaConstitucion, setFechaConstitucion] = useState("");
   const [fechaVencimiento, setFechaVencimiento] = useState("");
   const [valorConstituir, setValorConstituir] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    // Validación de campos obligatorios
+    if (
+      !tiempo ||
+      !tasa ||
+      !periodicidad ||
+      !fechaConstitucion ||
+      !fechaVencimiento ||
+      !valorConstituir
+    ) {
+      setError("Por favor, completa todos los campos.");
+      return;
+    }
+
+    // Validación de tiempo máximo de 30 días
+    if (parseInt(tiempo) > 30) {
+      setError("El tiempo máximo permitido es de 30 días.");
+      return;
+    }
+
+    // Validación de tasa como porcentaje
+    if (parseFloat(tasa) <= 0 || parseFloat(tasa) > 100) {
+      setError("La tasa debe ser un porcentaje válido.");
+      return;
+    }
+
+    // Validación de fecha de constitución y vencimiento
+    const fechaConstitucionObj = new Date(fechaConstitucion);
+    const fechaVencimientoObj = new Date(fechaVencimiento);
+    const fechaLimite = new Date();
+    fechaLimite.setDate(fechaLimite.getDate() + 30); // Fecha límite es la fecha actual más 30 días
+
+    if (fechaConstitucionObj >= fechaVencimientoObj) {
+      setError(
+        "La fecha de constitución debe ser anterior a la fecha de vencimiento."
+      );
+      return;
+    }
+
+    if (fechaVencimientoObj > fechaLimite) {
+      setError(
+        "La fecha de vencimiento no puede superar los 30 días a partir de la fecha de constitución."
+      );
+      return;
+    }
 
     const emailSubject = "Datos del formulario de inversión";
     const emailBody = `Tiempo: ${tiempo}\nTasa: ${tasa}\nPeriodicidad de los rendimientos: ${periodicidad}\nFecha de constitución: ${fechaConstitucion}\nFecha de vencimiento: ${fechaVencimiento}\nValor a constituir: ${valorConstituir}`;
@@ -26,12 +72,13 @@ const FormularioInversion = () => {
       <div className="bg-white rounded-lg p-6 shadow-lg">
         <h1 className="text-2xl font-bold mb-4">Formulario de Inversión</h1>
         <form onSubmit={handleSubmit}>
+          {error && <p className="text-red-500 mb-4">{error}</p>}
           <div className="mb-4">
             <label htmlFor="tiempo" className="block font-medium">
-              Tiempo:
+              Tiempo (en días, máximo 30):
             </label>
             <input
-              type="text"
+              type="number"
               id="tiempo"
               className="border border-gray-300 rounded-md px-3 py-2 w-full"
               value={tiempo}
@@ -40,7 +87,7 @@ const FormularioInversion = () => {
           </div>
           <div className="mb-4">
             <label htmlFor="tasa" className="block font-medium">
-              Tasa:
+              Tasa (%):
             </label>
             <input
               type="number"
