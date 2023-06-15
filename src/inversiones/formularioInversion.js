@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 
 const FormularioInversion = () => {
+  const [tiempo, setTiempo] = useState("");
+  const [tasa, setTasa] = useState("");
+  const [periodicidad, setPeriodicidad] = useState("");
+  const [fechaConstitucion, setFechaConstitucion] = useState("");
+  const [fechaVencimiento, setFechaVencimiento] = useState("");
+  const [valorConstituir, setValorConstituir] = useState("");
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Aquí puedes manejar la lógica de envío del formulario
+
+    const emailSubject = "Datos del formulario de inversión";
+    const emailBody = `Tiempo: ${tiempo}\nTasa: ${tasa}\nPeriodicidad de los rendimientos: ${periodicidad}\nFecha de constitución: ${fechaConstitucion}\nFecha de vencimiento: ${fechaVencimiento}\nValor a constituir: ${valorConstituir}`;
+
+    const gmailLink = `mailto:?subject=${encodeURIComponent(
+      emailSubject
+    )}&body=${encodeURIComponent(emailBody)}`;
+
+    window.location.href = gmailLink;
   };
 
   return (
@@ -19,6 +34,8 @@ const FormularioInversion = () => {
               type="text"
               id="tiempo"
               className="border border-gray-300 rounded-md px-3 py-2 w-full"
+              value={tiempo}
+              onChange={(e) => setTiempo(e.target.value)}
             />
           </div>
           <div className="mb-4">
@@ -30,6 +47,8 @@ const FormularioInversion = () => {
               id="tasa"
               step="0.01"
               className="border border-gray-300 rounded-md px-3 py-2 w-full"
+              value={tasa}
+              onChange={(e) => setTasa(e.target.value)}
             />
           </div>
           <div className="mb-4">
@@ -40,6 +59,8 @@ const FormularioInversion = () => {
               type="text"
               id="periodicidad"
               className="border border-gray-300 rounded-md px-3 py-2 w-full"
+              value={periodicidad}
+              onChange={(e) => setPeriodicidad(e.target.value)}
             />
           </div>
           <div className="mb-4">
@@ -50,6 +71,8 @@ const FormularioInversion = () => {
               type="date"
               id="fechaConstitucion"
               className="border border-gray-300 rounded-md px-3 py-2 w-full"
+              value={fechaConstitucion}
+              onChange={(e) => setFechaConstitucion(e.target.value)}
             />
           </div>
           <div className="mb-4">
@@ -60,6 +83,8 @@ const FormularioInversion = () => {
               type="date"
               id="fechaVencimiento"
               className="border border-gray-300 rounded-md px-3 py-2 w-full"
+              value={fechaVencimiento}
+              onChange={(e) => setFechaVencimiento(e.target.value)}
             />
           </div>
           <div className="mb-4">
@@ -71,6 +96,8 @@ const FormularioInversion = () => {
               id="valorConstituir"
               step="0.01"
               className="border border-gray-300 rounded-md px-3 py-2 w-full"
+              value={valorConstituir}
+              onChange={(e) => setValorConstituir(e.target.value)}
             />
           </div>
           <button
