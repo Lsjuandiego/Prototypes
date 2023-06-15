@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const TablaInversiones = ({ inversiones, onElegirMejorOpcion }) => {
+const TablaInversiones = ({
+  inversiones,
+  onElegirMejorOpcion,
+  tableClassName,
+  thClassName,
+  tdClassName,
+  trClassName,
+  buttonClassName,
+}) => {
   const [mejorOpcion, setMejorOpcion] = useState(null);
   const navigate = useNavigate(); // Hook useNavigate para la redirección
 
@@ -44,19 +52,20 @@ const TablaInversiones = ({ inversiones, onElegirMejorOpcion }) => {
 
   return (
     <div>
-      <table>
+      <table className={tableClassName}>
         <thead>
           <tr>
-            <th>Entidad bancaria</th>
-            <th>Tasa</th>
-            <th>Riesgos</th>
-            <th>Calificación</th>
+            <th className={thClassName}>Entidad bancaria</th>
+            <th className={thClassName}>Tasa</th>
+            <th className={thClassName}>Riesgos</th>
+            <th className={thClassName}>Calificación</th>
           </tr>
         </thead>
         <tbody>
           {inversiones.map((inversion, index) => (
             <tr
               key={index}
+              className={trClassName}
               style={{
                 textDecoration:
                   mejorOpcion === inversion ? "underline" : "none",
@@ -64,18 +73,22 @@ const TablaInversiones = ({ inversiones, onElegirMejorOpcion }) => {
                   mejorOpcion === inversion ? "yellow" : "transparent",
               }}
             >
-              <td>{inversion.entidad}</td>
-              <td>{inversion.tasa}</td>
-              <td>{inversion.riesgos}</td>
-              <td>{inversion.calificacion}</td>
+              <td className={tdClassName}>{inversion.entidad}</td>
+              <td className={tdClassName}>{inversion.tasa}</td>
+              <td className={tdClassName}>{inversion.riesgos}</td>
+              <td className={tdClassName}>{inversion.calificacion}</td>
             </tr>
           ))}
         </tbody>
       </table>
       {mejorOpcion ? (
-        <button onClick={handleNotificarEntidad}>Notificar a la entidad</button>
+        <button onClick={handleNotificarEntidad} className={buttonClassName}>
+          Notificar a la entidad
+        </button>
       ) : (
-        <button onClick={elegirMejorOpcion}>Elegir mejor opción</button>
+        <button onClick={elegirMejorOpcion} className={buttonClassName}>
+          Elegir mejor opción
+        </button>
       )}
     </div>
   );

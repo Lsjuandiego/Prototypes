@@ -15,12 +15,22 @@ const Inversiones = () => {
   };
 
   return (
-    <div>
-      <h1>Inversiones</h1>
-      <Link to="/vencimiento-inversiones">Vencimientos</Link>
+    <div className="flex flex-col items-center mt-8">
+      <h1 className="text-2xl font-bold mb-4">Inversiones</h1>
+      <Link
+        to="/vencimiento-inversiones"
+        className="text-blue-500 hover:text-blue-700 mb-4"
+      >
+        Ver fechas de vencimiento
+      </Link>
       <TablaInversiones
         inversiones={inversiones}
         onElegirMejorOpcion={handleElegirMejorOpcion}
+        tableClassName="w-full border-collapse"
+        thClassName="bg-gray-200 py-2 px-4 border-b"
+        tdClassName="border py-2 px-4"
+        trClassName="border-b"
+        buttonClassName="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
       />
     </div>
   );
