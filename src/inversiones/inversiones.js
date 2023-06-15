@@ -21,7 +21,7 @@ const Inversiones = () => {
         to="/vencimiento-inversiones"
         className="text-blue-500 hover:text-blue-700 mb-4"
       >
-        Ver fechas de vencimiento
+        Ver todas las inversiones
       </Link>
       <TablaInversiones
         inversiones={inversiones}

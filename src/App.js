@@ -4,6 +4,8 @@ import { Header, Footer } from "./headerAndFooter/headerFooter";
 import Inversiones from "./inversiones/inversiones";
 import Vencimientos from "./inversiones/vencimientos";
 import FormularioInversion from "./inversiones/formularioInversion";
+import VerLibranzas from "./libranzas/verLibranzas";
+import RegistroLibranza from "./libranzas/registroLibranzas";
 
 const App = () => {
   return (
@@ -17,6 +19,8 @@ const App = () => {
             path="/formulario-inversion"
             element={<FormularioInversion />}
           />
+          <Route path="/libranzas" element={<VerLibranzas />} />
+          <Route path="/registro-libranza" element={<RegistroLibranza />} />
         </Routes>
         <Footer />
       </div>

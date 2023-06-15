@@ -7,7 +7,7 @@ const Header = () => {
     <header className="bg-blue-500 flex justify-between items-center py-4">
       <nav className="container mx-auto">
         <ul className="flex space-x-4 text-white font-sans">
-          <li>
+          <li className="ml-3">
             <Link
               to="/inversiones"
               className="hover:text-gray-300 transition-colors duration-300"
@@ -15,10 +15,18 @@ const Header = () => {
               Inversiones
             </Link>
           </li>
+          <li className="ml-3">
+            <Link
+              to="/libranzas"
+              className="hover:text-gray-300 transition-colors duration-300"
+            >
+              Libranzas
+            </Link>
+          </li>
           {/* Agrega aquí más elementos <li> para otros links en el header */}
         </ul>
       </nav>
-      <img src={logo} alt="Logo Ucaldas" className="w-12 h-12" />
+      <img src={logo} alt="Logo Ucaldas" className="w-12 h-12 mr-3" />
     </header>
   );
 };
